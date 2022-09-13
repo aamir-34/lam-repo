@@ -1,8 +1,10 @@
 name:  Deploy to GKE
 
 on:
-  push:
+  on: [push, pull_request]
+  
     branches:
+    
       - main
 
 env:
