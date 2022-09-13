@@ -1,9 +1,8 @@
-name:  Deploy to GKE
+name: Build and Deploy to GKE
 
-  on: [push, pull_request]
-  
+on:
+  push:
     branches:
-    
       - main
 
 env:
@@ -30,7 +29,11 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
           service_account_key: ${{secrets.GKE_SA_KEY}}
-          project_id: ${{secrets.GKE_Project}}
+          project_id: ${{secrets.GKE_PROJECT}}
+
+      - name: Get GKE Credentials
+        run: |-
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE
 
       - name: Set up Kustomize
         run: |-
