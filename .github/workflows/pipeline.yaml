@@ -1,6 +1,5 @@
 name:  Deploy to GKE
 
-on:
   on: [push, pull_request]
   
     branches:
